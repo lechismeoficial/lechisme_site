@@ -56,12 +56,19 @@ def generar_drama(universo_key):
     ])
     resp = client.messages.create(model="claude-sonnet-4-6", max_tokens=3000, messages=[{"role":"user","content":prompt}])
     texto = resp.content[0].text.strip().replace("```json","").replace("```","").strip()
-    # parser robusto
-    if match:
+    s = texto.find("{")
+    e = texto.rfind("}")
+    if s >= 0 and e > s:
+        cand = texto[s:e+1]
         try:
-            return json.loads(match.group())
+            return json.loads(cand)
         except:
-            return json.loads(re.sub(r"(?<!\\)\n"," ",match.group()))
+            cand2 = cand.replace(chr(10)," ").replace(chr(13),"")
+            try:
+                return json.loads(cand2)
+            except:
+                cand3 = cand2.replace(chr(34)+chr(34),chr(34)+"'")
+                return json.loads(cand3)
     raise ValueError("No JSON")
 def descargar_musica():
     os.makedirs("musica", exist_ok=True)
