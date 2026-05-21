@@ -56,7 +56,7 @@ def generar_drama(universo_key):
     ])
     resp = client.messages.create(model="claude-sonnet-4-6", max_tokens=3000, messages=[{"role":"user","content":prompt}])
     texto = resp.content[0].text.strip().replace("```json","").replace("```","").strip()
-    match = re.search(r"\{.*\}", texto, re.DOTALL)
+    # parser robusto
     if match:
         try:
             return json.loads(match.group())
