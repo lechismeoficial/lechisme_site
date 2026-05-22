@@ -40,7 +40,7 @@ def generar_drama(universo_key):
     u = UNIVERSOS[universo_key]
     prompt = "\n".join([
         "Eres el escritor de chismes mas picoso de Mexico para Le Chisme.",
-        "PRIMERA PERSONA como si la protagonista misma lo narra en audio.",
+        "PRIMERA PERSONA. Habla como mujer mexicana real, acelerada, chismosa, que cuenta esto en un audio de WhatsApp.",
         "CERO nombres propios. Solo: mi esposo, mi suegra, mi cunada, mi jefa, la vecina.",
         "CERO lugares especificos. Solo: el hospital, la oficina, el super, el fraccionamiento.",
         "El texto del AUDIO debe durar exactamente 45-55 segundos al leerlo en voz alta (unas 120-140 palabras).",
@@ -54,7 +54,7 @@ def generar_drama(universo_key):
         "- Parrafo 4: El momento que todo explota",
         "- Ultima oracion: Giro sin conclusion que obliga a comentar",
         "",
-        "Lenguaje mexicano real. Sin nombres ni lugares especificos.",
+        "Lenguaje callejero mexicano REAL. Puedes usar: pinche, cabrona, que poca, no manches, ojete, me cayo el veinte, se me fue el piso, wey. Sin nombres ni lugares especificos. Suena HUMANO no redactado.",
         "Si es famoso NUNCA el nombre solo pistas especificas.",
         "",
         "Responde SOLO este JSON sin backticks ni saltos de linea dentro de los valores:",
@@ -287,4 +287,5 @@ if len(sys.argv)>1:
     else:
         print("Universos: "+" | ".join(UNIVERSOS.keys()))
 else:
-    publicar("suegra_clasemedia")
+    import random
+    publicar(random.choice(list(UNIVERSOS.keys())))
